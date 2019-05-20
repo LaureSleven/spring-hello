@@ -1,10 +1,10 @@
 pipeline {
   agent any
   environment {
-    dockerhub_username = '<dockerhub_username>'
+    dockerhub_username = 'lauresleven'
     img_name = 'spring-hello'
     img_tag = sh (returnStdout: true, script: 'git log -1 --pretty=%h').trim()
-    username = '<username>'
+    username = 'user8'
   }
   stages {
     stage('Build') {
@@ -16,7 +16,7 @@ pipeline {
     }
     stage('Push') {
       steps {
-        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: '<username>', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'user8', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
           sh """
             echo ${WORKSPACE}
             docker login -u ${USERNAME} -p ${PASSWORD}
